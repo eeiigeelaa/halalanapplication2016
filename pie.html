@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+		  ['Grace Poe',     13],
+          ['Mar Roxas',     11],
+          ['Jejomar Binay',      9],
+          ['Antonio Rellianes',  2],
+          ['Panfillo Lacson', 2],
+          ['Rodrigo Duterte',    7],
+		  ['Francis Escudero',     11],
+          ['Alan Peter Cayetano',      2],
+          ['Miriam Defensor Santiago',  2],
+          ['Ferdinand Marcos Jr.', 2],
+          ['Gilberto Teodoro',    7]
+		  
+        ]);
+
+        var options = {
+          title: 'My President'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+	<script>
+	$(document).ready(function(){
+	console.log("The Jquery Works");
+	$.ajax({
+      		type:'GET',
+      		url:'displaygrade.php',
+      		dataType: "html",  
+      		data: {},
+      			success:function(data) {
+        			if(data) {   
+            				$('#divDisplay').html(data);
+        			} else {
+      				}
+    		}
+   	});
+		
+	$('#btnSubmit').click(function(){
+		$.ajax({
+      		type:'POST',
+      		url:'addgrade.php',
+      		dataType: "html",  
+      		data: $('#frmAddGrade').serialize(),
+      			success:function(data) {
+        			if(data) {   
+            				alert(data);
+        			} else {
+      				}
+    		}
+   		});
+	});
+});
+</script>
+<style>
+
+body {
+   background-color: #4295EC
+}
+	html, body {
+	height: 100%;
+	width:100%;
+	margin: 0;
+	padding: 0;
+	}
+	#map {
+	height: 100%;
+	width:100%;
+	}
+	#floating-panel {
+	position: absolute;
+	top: 10px;
+	left: 25%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #999;
+	text-align: center;
+	font-family: 'Roboto','sans-serif';
+	line-height: 30px;
+	padding-left: 10px;
+	}
+
+	#floating-panel {
+	background-color: #fff;
+	border: 1px solid #999;
+	left: 25%;
+	padding: 5px;
+	position: absolute;
+	top: 10px;
+	z-index: 5;
+	}
+    </style>
+  </head>
+  <body>
+  <a href="home.html" ><button class="btn btn-info btn-lg btn-block">HOME</button></a><br><br>
+ 
+  		<form id="frmAddGrade">
+		<select id='txtprovince' name='txtprovince' /><br/>
+							<option>Nueva Ecija</option>
+							<option>Bataan</option>
+							<option>Bulacan</option>
+							<option>Zambales</option>
+							<option>Pampanga</option>
+							<option>Aurora</option>
+							<option>Tarlac</option>
+			</select><br> <br>
+		<select id='txtpresident' name='txtpresident' /><br/>
+								<option>Grace Poe</option>
+								<option>Mar Roxas</option>
+								<option>Jejomar Binay</option>
+								<option>Antonio Rellianes</option>
+								<option>Panfillo Lacson</option>
+								<option>Rodrigo Duterte</option>
+								<option>Francis Escudero</option>
+								<option>Alan Peter Cayetano</option>
+								<option>Miriam Defensor Santiago</option>
+								<option>Ferdinand Marcos Jr.</option>
+								<option>Gilberto Teodoro</option>
+		</select>  
+	</form><br/>
+	<button id="btnSubmit">SUBMIT</button>
+	
+	<hr/>
+    <div id="piechart" style="width: 550px; height: 500px;"></div>
+  </body>
+</html>
